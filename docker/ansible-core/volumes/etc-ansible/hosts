@@ -1,0 +1,8 @@
+node-01 ansible_user=root
+node-02 ansible_user=root
+node-03 ansible_user=root
+node-04 ansible_user=root
+
+[web-servers]
+node-01
+node-02

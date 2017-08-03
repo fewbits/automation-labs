@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mysql:
+    container_name: mysql
+    hostname: mysql
+    image: mysql:latest
+    environment:
+    - "MYSQL_ROOT_PASSWORD=root"
+    - "MYSQL_DATABASE=semaphore"
+  semaphore:
+    container_name: semaphore
+    hostname: semaphore
+    image: playniuniu/ansible-semaphore:latest
+    ports:
+      - 8083:3000/tcp
+    links:
+      - mysql
+    volumes:
+      - "./semaphore/data:/data"

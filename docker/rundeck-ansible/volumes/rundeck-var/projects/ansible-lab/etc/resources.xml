@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+  <node name="localhost" description="Rundeck server node" tags="" hostname="localhost" osArch="amd64" osFamily="unix" osName="Linux" osVersion="4.10.6-1-ARCH" username="rundeck"/>
+  <node name="ansible-core" description="Ansible Core" tags="ansible" hostname="ansible-core" osArch="amd64" osFamily="unix" osName="Linux" osVersion="4.10.6-1-ARCH" username="root"/>
+</project>

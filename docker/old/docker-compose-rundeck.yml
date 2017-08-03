@@ -1,0 +1,10 @@
+version: '3'
+services:
+  rundeck:
+    container_name: rundeck
+    environment:
+    - "SERVER_URL=http://0.0.0.0:8082"
+    hostname: rundeck
+    image: jordan/rundeck:latest
+    ports:
+      - 8082:4440/tcp

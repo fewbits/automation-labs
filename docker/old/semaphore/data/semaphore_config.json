@@ -1,0 +1,13 @@
+{
+ 	"mysql": {
+ 		"host": "mysql:3306",
+ 		"user": "root",
+ 		"pass": "root",
+ 		"name": "semaphore"
+ 	},
+ 	"port": "",
+ 	"bugsnag_key": "",
+ 	"tmp_path": "/data",
+ 	"cookie_hash": "XzSMZx5nPIC765f86GrRHzbqnjjOzH60dpzUBi0yDiU=",
+ 	"cookie_encryption": "ae2sgfbkIhLhRmIhgNz90FS/cSAlbdQs2jaQlw6dmi4="
+ }
