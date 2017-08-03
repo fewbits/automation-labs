@@ -17,17 +17,30 @@
 #   For more information, please refer to the README.md file.
 #   Any doubts, feel free to mail me.
 #
-##########
-# Config #
-##########
-export sysExternalIP="35.192.181.73"
 
 #############
 # Functions #
 #############
 
 function labStart() {
+  shift
+
+  # Validating user arguments
+  if [ $1 ]; then
+    usrExternalIP=$1
+    export usrExternalIP
+  else
+    printLog error "Wrong syntax. Try `basename $0` --help"
+  fi
+
   printLog info "Correcting permissions of SSH files"
+  chmod 700 docker/rundeck-ansible/volumes/rundeck-ssh
+  chmod 600 docker/rundeck-ansible/volumes/rundeck-ssh/id_rsa
+  chmod 644 docker/rundeck-ansible/volumes/rundeck-ssh/id_rsa.pub
+  chmod 700 docker/ansible-core/files/home-ssh
+  chmod 600 docker/ansible-core/files/home-ssh/id_rsa
+  chmod 644 docker/ansible-core/files/home-ssh/id_rsa.pub
+  chmod 640 docker/ansible-core/files/home-ssh/authorized_keys
 
   printLog info "Starting Automation Lab..."
   docker-compose --file ./docker/docker-compose.yml build
@@ -86,7 +99,7 @@ function printLog() {
 
 function printSyntax() {
   echo "Syntax:"
-  echo "  `basename $0` start [ansible-tower|rundeck|semaphore]"
+  echo "  `basename $0` start EXTERNAL_IP"
   echo "  `basename $0` stop"
   echo "  `basename $0` restart"
   echo "  `basename $0` [-h|--help]"

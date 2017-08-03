@@ -12,5 +12,5 @@ ARG https_proxy
 # Copying Rundeck configurations and plugins
 COPY files/rundeck-libext/LogstashPlugin.groovy /var/lib/rundeck/libext
 
-# Correcting permissions on SSH files
-RUN chmod -R 0600 /etc/ssh
+# Changing Rundeck user Shell
+RUN usermod -s /bin/bash rundeck
