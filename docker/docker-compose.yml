@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
   ansible-core:
     build:
@@ -19,16 +19,16 @@ services:
       - 7022:22/tcp
     volumes:
       - ./ansible-core/volumes/etc-ansible:/etc/ansible
-  gitlab:
-    container_name: gitlab
-    hostname: gitlab
-    image: gitlab/gitlab-ce:latest
-    ports:
-      - 8022:22/tcp
-      - 80:80/tcp
-      - 443:443/tcp
-    volumes:
-      - ./gitlab/volumes/config:/etc/gitlab
+#  gitlab:
+#    container_name: gitlab
+#    hostname: gitlab
+#    image: gitlab/gitlab-ce:latest
+#    ports:
+#      - 8022:22/tcp
+#      - 80:80/tcp
+#      - 443:443/tcp
+#    volumes:
+#      - ./gitlab/volumes/config:/etc/gitlab
 #  jenkins:
 #    container_name: jenkins
 #    hostname: jenkins

@@ -17,6 +17,9 @@ COPY files/etc-ssh /etc/ssh
 COPY files/home-ssh /root/.ssh
 COPY files/docker-entrypoint.sh /docker-entrypoint.sh
 
+# Correcting permissions on SSH files
+RUN chmod -R 0600 /etc/ssh
+
 # Changing default SHELL from ASH to BASH
 RUN sed -i s/'\/bin\/ash'/'\/bin\/bash'/g /etc/passwd
 
