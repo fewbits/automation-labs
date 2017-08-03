@@ -71,9 +71,9 @@ services:
     container_name: rundeck
     environment:
     - "SERVER_URL=http://localhost:4440"
-    - "EXTERNAL_SERVER_URL=http://localhost:8081"
+    - "EXTERNAL_SERVER_URL=http://${sysExternalIP}:8081"
     - "RD_URL=http://localhost:4440"
-    - "RD_BYPASS_URL=http://localhost:8081"
+    - "RD_BYPASS_URL=http://${sysExternalIP}:8081"
     - "RD_USER=admin"
     - "RD_PASSWORD=admin"
     - "RD_PROJECT=ansible-lab"

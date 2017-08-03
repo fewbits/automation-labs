@@ -17,6 +17,10 @@
 #   For more information, please refer to the README.md file.
 #   Any doubts, feel free to mail me.
 #
+##########
+# Config #
+##########
+export sysExternalIP="35.192.181.73"
 
 #############
 # Functions #
