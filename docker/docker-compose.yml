@@ -24,9 +24,7 @@ services:
 #    hostname: gitlab
 #    image: gitlab/gitlab-ce:latest
 #    ports:
-#      - 8022:22/tcp
-#      - 80:80/tcp
-#      - 443:443/tcp
+#      - 8080:80/tcp
 #    volumes:
 #      - ./gitlab/volumes/config:/etc/gitlab
 #  jenkins:
@@ -34,7 +32,7 @@ services:
 #    hostname: jenkins
 #    image: "jenkins:2.60.1-alpine"
 #    ports:
-#      - "8082:8080"
+#      - "443:8080"
 #    links:
 #      - ansible-core
   node-01:
@@ -71,9 +69,9 @@ services:
     container_name: rundeck
     environment:
     - "SERVER_URL=http://localhost:4440"
-    - "EXTERNAL_SERVER_URL=http://${sysExternalIP}:8081"
+    - "EXTERNAL_SERVER_URL=http://${sysExternalIP}"
     - "RD_URL=http://localhost:4440"
-    - "RD_BYPASS_URL=http://${sysExternalIP}:8081"
+    - "RD_BYPASS_URL=http://${sysExternalIP}"
     - "RD_USER=admin"
     - "RD_PASSWORD=admin"
     - "RD_PROJECT=ansible-lab"
@@ -82,7 +80,7 @@ services:
     links:
       - ansible-core
     ports:
-      - 8081:4440/tcp
+      - 80:4440/tcp
     volumes:
       - ./rundeck-ansible/volumes/rundeck-etc:/etc/rundeck
       - ./rundeck-ansible/volumes/rundeck-jobs:/etc/rundeck-jobs

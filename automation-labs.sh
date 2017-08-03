@@ -27,6 +27,8 @@ export sysExternalIP="35.192.181.73"
 #############
 
 function labStart() {
+  printLog info "Correcting permissions of SSH files"
+
   printLog info "Starting Automation Lab..."
   docker-compose --file ./docker/docker-compose.yml build
   docker-compose --file ./docker/docker-compose.yml up -d
