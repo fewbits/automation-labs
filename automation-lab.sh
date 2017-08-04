@@ -61,7 +61,7 @@ function labStart() {
   fi
 
   sleep 3
-  docker-compose --file ${sysDockerComposePath} logs --tail=32 2> /dev/null
+  docker-compose --file ${sysDockerComposePath} logs --tail=16 2> /dev/null
 
   ## Configuring Rundeck
 
@@ -76,8 +76,16 @@ function labStart() {
   # Waiting for GitLab to start
   waitForApp "gitlab" "http://localhost"
 
-  # Creating Repository and WebHook
-  printLog info "Creating GitLab repository and Web Hook"
+  # Token
+  printLog info "Obtaining GitLab Private Token"
+  docker-compose --file ${sysDockerComposePath} exec --user gitlab-psql gitlab bash -c '/etc/gitlab/gitlab-token.sh' 2> /dev/null
+  docker-compose --file ${sysDockerComposePath} exec gitlab bash -c 'cat /tmp/token.txt' 2> /dev/null
+  #docker-compose --file ${sysDockerComposePath} exec --user gitlab-psql gitlab "/opt/gitlab/embedded/bin/psql -h /var/opt/gitlab/postgresql -d gitlabhq_production -t -c \"SELECT authentication_token FROM users WHERE username='root';\""
+  #printLog info "GitLab Private Token is => $gitlabToken"
+  #echo "gitlabToken=$gitlabToken" > docker/gitlab/volumes/config/token.sh
+
+  # Repository and WebHook
+  printLog info "Creating GitLab Repository and WebHook"
   docker-compose --file ${sysDockerComposePath} exec gitlab bash -c '/etc/gitlab/gitlab-config.sh' 2> /dev/null
 
   # OK - We are all set
