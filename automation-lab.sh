@@ -61,16 +61,20 @@ function labStart() {
   fi
 
   sleep 3
-  docker-compose --file ${sysDockerComposePath} logs --tail 80 2> /dev/null
+  docker-compose --file ${sysDockerComposePath} logs --tail 32 2> /dev/null
 
   # Configuring Rundeck
-  ## Waiting Rundeck to start
-  waitForRundeck
+  ## Waiting for Rundeck to start
+  waitForApp "rundeck" '${RD_URL}'
   ## Importing Rundeck Jobs
   rundeckJobLoad "ansible-lab" "hello-world.yml" "yaml" "update"
   #rundeckJobLoad "ansible-lab" "ansible-command.yml" "yaml" "update"
   #rundeckJobLoad "ansible-lab" "ansible-module.yml" "yaml" "update"
   rundeckJobLoad "ansible-lab" "ansible-playbook.yml" "yaml" "update"
+
+  # Configuring GitLab
+  ## Waiting for GitLab to start
+  waitForApp "gitlab" "http://localhost"
 
   # OK - We are all set
   printLog info "The lab is ready to use - Go to http://${usrExternalIP} and have fun :)"
@@ -202,6 +206,30 @@ function waitForRundeck() {
     docker-compose --file ${sysDockerComposePath} exec rundeck sh -c 'curl ${RD_URL}' >/dev/null 2>&1
     curlRC=$?
   done
+}
+
+function waitForApp() {
+  appName=$1
+  appEndpoint=$2
+
+  if [ ! $2 ]; then
+    printLog error "Wrong number of arguments"
+  fi
+
+  printLog info "Checking wether '${appName}' app is fully up..."
+  docker-compose --file ${sysDockerComposePath} exec ${appName} sh -c "curl ${appEndpoint}" >/dev/null 2>&1
+  curlRC=$?
+
+  until [ $curlRC -eq 0 ]
+  do
+    printLog info "Waiting '${appName}' app to be fully up..."
+    sleep 4
+    docker-compose --file ${sysDockerComposePath} exec ${appName} sh -c "curl ${appEndpoint}" >/dev/null 2>&1
+    curlRC=$?
+  done
+
+  printLog info "OK - '${appName}' app is up"
+
 }
 
 ################
