@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 gitRepository="http://gitlab/root/ansible-lab.git"
 gitClonePath="${HOME}/ansible-lab"
 jobProject="ansible-lab"
