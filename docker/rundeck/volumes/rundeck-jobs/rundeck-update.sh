@@ -5,6 +5,13 @@ jobProject="ansible-lab"
 jobFormat="yaml"
 jobDuplicate="update"
 
+# Rundeck Config
+RD_URL="http://localhost:4440"
+RD_BYPASS_URL="http://localhost:8080"
+RD_USER="admin"
+RD_PASSWORD="admin"
+RD_PROJECT="ansible-lab"
+
 ## This script will 'auto-update' Rundeck's Jobs
 
 if [ -d ${gitClonePath} ]; then
