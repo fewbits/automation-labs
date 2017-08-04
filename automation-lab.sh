@@ -61,17 +61,24 @@ function labStart() {
   fi
 
   sleep 3
-  docker-compose --file ${sysDockerComposePath} logs --tail 32 2> /dev/null
+  docker-compose --file ${sysDockerComposePath} logs --tail=32 2> /dev/null
 
-  # Configuring Rundeck
-  ## Waiting for Rundeck to start
+  ## Configuring Rundeck
+
+  # Waiting for Rundeck to start
   waitForApp "rundeck" '${RD_URL}'
-  ## Importing Rundeck Jobs
+
+  # Importing Rundeck Jobs
   rundeckJobLoad "ansible-lab" "rundeck-update.yml" "yaml" "update"
 
-  # Configuring GitLab
-  ## Waiting for GitLab to start
+  ## Configuring GitLab
+
+  # Waiting for GitLab to start
   waitForApp "gitlab" "http://localhost"
+
+  # Creating Repository and WebHook
+  printLog info "Creating GitLab repository and Web Hook"
+  docker-compose --file ${sysDockerComposePath} exec gitlab bash -c '/etc/gitlab/gitlab-config.sh' 2> /dev/null
 
   # OK - We are all set
   printLog info "The lab is ready to use - Go to http://${usrExternalIP} and have fun :)"
@@ -225,7 +232,7 @@ function waitForApp() {
     curlRC=$?
   done
 
-  printLog info "OK - '${appName}' app is up"
+  printLog info "OK - App '${appName}' is up"
 
 }
 
