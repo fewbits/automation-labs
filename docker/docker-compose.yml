@@ -15,25 +15,21 @@ services:
       - node-02
       - node-03
       - node-04
-#    ports:
-#      - 7022:22/tcp
-    volumes:
-      - ./ansible/volumes/etc-ansible:/etc/ansible
 #  apache:
 #    container_name: apache
 #    hostname: apache
 #    image: httpd:2.4.27-alpine
-  gitlab:
-    container_name: gitlab
-    environment:
-      - "GITLAB_OMNIBUS_CONFIG=external_url 'http://${usrExternalIP}/';"
-      - "GITLAB_ROOT_PASSWORD=automation"
-    hostname: gitlab
-    image: gitlab/gitlab-ce:9.4.3-ce.0
-    ports:
-      - 80:80/tcp
-    volumes:
-      - ./gitlab/volumes/config:/etc/gitlab
+#  gitlab:
+#    container_name: gitlab
+#    environment:
+#      - "GITLAB_OMNIBUS_CONFIG=external_url 'http://${usrExternalIP}/';"
+#      - "GITLAB_ROOT_PASSWORD=automation"
+#    hostname: gitlab
+#    image: gitlab/gitlab-ce:9.4.3-ce.0
+#    ports:
+#      - 80:80/tcp
+#    volumes:
+#      - ./gitlab/volumes/config:/etc/gitlab
 #  jenkins:
 #    container_name: jenkins
 #    hostname: jenkins
@@ -60,51 +56,43 @@ services:
     container_name: node-01
     hostname: node-01
     image: automation-labs/ansible:1.0
-#    ports:
-#      - 7122:22/tcp
   node-02:
     container_name: node-02
     hostname: node-02
     image: automation-labs/ansible:1.0
-#    ports:
-#      - 7222:22/tcp
   node-03:
     container_name: node-03
     hostname: node-03
     image: automation-labs/ansible:1.0
-#    ports:
-#      - 7322:22/tcp
   node-04:
     container_name: node-04
     hostname: node-04
     image: automation-labs/ansible:1.0
+#  rundeck:
+#    build:
+#      args:
+#        http_proxy: ${http_proxy}
+#        https_proxy: ${https_proxy}
+#      context: ./rundeck
+#      dockerfile: Dockerfile
+#    container_name: rundeck
+#    environment:
+#    - "SERVER_URL=http://localhost:4440"
+#    - "EXTERNAL_SERVER_URL=http://${usrExternalIP}:8080"
+#    - "RD_URL=http://localhost:4440"
+#    - "RD_BYPASS_URL=http://${usrExternalIP}:8080"
+#    - "RD_USER=admin"
+#    - "RD_PASSWORD=admin"
+#    - "RD_PROJECT=ansible-lab"
+#    #- "RDECK_JVM_SETTINGS=-Dserver.web.context=/rundeck"
+#    hostname: rundeck
+#    image: automation-labs/rundeck-ansible:1.0
+#    links:
+#      - ansible-core
 #    ports:
-#      - 7422:22/tcp
-  rundeck:
-    build:
-      args:
-        http_proxy: ${http_proxy}
-        https_proxy: ${https_proxy}
-      context: ./rundeck
-      dockerfile: Dockerfile
-    container_name: rundeck
-    environment:
-    - "SERVER_URL=http://localhost:4440"
-    - "EXTERNAL_SERVER_URL=http://${usrExternalIP}:8080"
-    - "RD_URL=http://localhost:4440"
-    - "RD_BYPASS_URL=http://${usrExternalIP}:8080"
-    - "RD_USER=admin"
-    - "RD_PASSWORD=admin"
-    - "RD_PROJECT=ansible-lab"
-    #- "RDECK_JVM_SETTINGS=-Dserver.web.context=/rundeck"
-    hostname: rundeck
-    image: automation-labs/rundeck-ansible:1.0
-    links:
-      - ansible-core
-    ports:
-      - 8080:4440/tcp
-    volumes:
-      - ./rundeck/volumes/rundeck-etc:/etc/rundeck
-      - ./rundeck/volumes/rundeck-jobs:/etc/rundeck-jobs
-      - ./rundeck/volumes/rundeck-ssh:/var/lib/rundeck/.ssh
-      - ./rundeck/volumes/rundeck-var:/var/rundeck
+#      - 8080:4440/tcp
+#    volumes:
+#      - ./rundeck/volumes/rundeck-etc:/etc/rundeck
+#      - ./rundeck/volumes/rundeck-jobs:/etc/rundeck-jobs
+#      - ./rundeck/volumes/rundeck-ssh:/var/lib/rundeck/.ssh
+#      - ./rundeck/volumes/rundeck-var:/var/rundeck
