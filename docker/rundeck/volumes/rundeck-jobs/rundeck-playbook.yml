@@ -1,4 +1,4 @@
-- description: Executes an Ansible Playbook.
+- description: Executes an Ansible Playbook
   executionEnabled: true
   id: 7ac894bd-3629-49e1-94cb-4dd449f7f050
   loglevel: INFO
