@@ -40,6 +40,7 @@ function labStart() {
   fi
 
   printLog info "Correcting permissions of SSH files"
+  sleep 1
   chmod 700 docker/rundeck/volumes/rundeck-ssh
   chmod 600 docker/rundeck/volumes/rundeck-ssh/id_rsa
   chmod 644 docker/rundeck/volumes/rundeck-ssh/id_rsa.pub
@@ -52,7 +53,7 @@ function labStart() {
   docker-compose --file ${sysDockerComposePath} build 2>/dev/null
 
   printLog info "Starting the Automation Lab..."
-  docker-compose --file ${sysDockerComposePath} up -d #2>/dev/null
+  docker-compose --file ${sysDockerComposePath} up -d 2>/dev/null
   labStartRC=$?
   if [ ${labStartRC} -eq 0 ]; then
     printLog info "Automation Lab started"
@@ -61,7 +62,8 @@ function labStart() {
   fi
 
   sleep 3
-  docker-compose --file ${sysDockerComposePath} logs --tail=16 2> /dev/null
+
+  docker-compose --file ${sysDockerComposePath} logs --tail=8 2> /dev/null
 
   ## Configuring Rundeck
 
@@ -70,6 +72,7 @@ function labStart() {
 
   # Importing Rundeck Jobs
   rundeckJobLoad "ansible-lab" "rundeck-update.yml" "yaml" "update"
+  rundeckJobLoad "ansible-lab" "rundeck-playbook.yml" "yaml" "update"
 
   ## Configuring GitLab
 
@@ -80,9 +83,6 @@ function labStart() {
   printLog info "Obtaining GitLab Private Token"
   docker-compose --file ${sysDockerComposePath} exec --user gitlab-psql gitlab bash -c '/etc/gitlab/gitlab-token.sh' 2> /dev/null
   docker-compose --file ${sysDockerComposePath} exec gitlab bash -c 'cat /tmp/token.txt' 2> /dev/null
-  #docker-compose --file ${sysDockerComposePath} exec --user gitlab-psql gitlab "/opt/gitlab/embedded/bin/psql -h /var/opt/gitlab/postgresql -d gitlabhq_production -t -c \"SELECT authentication_token FROM users WHERE username='root';\""
-  #printLog info "GitLab Private Token is => $gitlabToken"
-  #echo "gitlabToken=$gitlabToken" > docker/gitlab/volumes/config/token.sh
 
   # Repository and WebHook
   printLog info "Creating GitLab Repository and WebHook"
