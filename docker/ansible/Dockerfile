@@ -14,7 +14,7 @@ RUN apk add --update ansible openssh
 
 # Copying configuration files
 COPY files/etc-ssh /etc/ssh
-COPY files/home-ssh /root/.ssh
+COPY files/root-ssh /root/.ssh
 COPY files/docker-entrypoint.sh /docker-entrypoint.sh
 
 # Correcting permissions on SSH files
