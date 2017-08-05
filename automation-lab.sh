@@ -50,10 +50,10 @@ function labStart() {
   #chmod 640 docker/ansible/files/home-ssh/authorized_keys
 
   printLog info "Building the Automation Lab..."
-  docker-compose --file ${sysDockerComposePath} build 2>/dev/null
+  docker-compose --file ${sysDockerComposePath} build #2>/dev/null
 
   printLog info "Starting the Automation Lab..."
-  docker-compose --file ${sysDockerComposePath} up -d 2>/dev/null
+  docker-compose --file ${sysDockerComposePath} up -d #2>/dev/null
   labStartRC=$?
   if [ ${labStartRC} -eq 0 ]; then
     printLog info "Automation Lab started"

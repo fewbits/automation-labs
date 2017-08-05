@@ -1,20 +1,37 @@
 version: '2'
 services:
-  ansible-core:
+  ansible-core-01:
     build:
       args:
         http_proxy: ${http_proxy}
         https_proxy: ${https_proxy}
       context: ./ansible
       dockerfile: Dockerfile
-    container_name: ansible-core
-    hostname: ansible-core
-    image: automation-labs/ansible:1.0
+    container_name: ansible-core-01
+    hostname: ansible-core-01
+    image: automation-lab/ansible:1.0
     links:
       - node-01
       - node-02
       - node-03
       - node-04
+  ansible-core-02:
+    container_name: ansible-core-02
+    hostname: ansible-core-02
+    image: automation-lab/ansible:1.0
+    links:
+      - node-01
+      - node-02
+      - node-03
+      - node-04
+  ansible-core-03:
+    container_name: ansible-core-03
+    hostname: ansible-core-03
+    image: automation-lab/ansible:1.0
+    links:
+      - node-01
+      - node-02
+      - node-03
 #  apache:
 #    container_name: apache
 #    hostname: apache
@@ -55,19 +72,19 @@ services:
   node-01:
     container_name: node-01
     hostname: node-01
-    image: automation-labs/ansible:1.0
+    image: automation-lab/ansible:1.0
   node-02:
     container_name: node-02
     hostname: node-02
-    image: automation-labs/ansible:1.0
+    image: automation-lab/ansible:1.0
   node-03:
     container_name: node-03
     hostname: node-03
-    image: automation-labs/ansible:1.0
+    image: automation-lab/ansible:1.0
   node-04:
     container_name: node-04
     hostname: node-04
-    image: automation-labs/ansible:1.0
+    image: automation-lab/ansible:1.0
 #  rundeck:
 #    build:
 #      args:
