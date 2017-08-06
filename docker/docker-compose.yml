@@ -52,6 +52,16 @@ services:
       - 80:80/tcp
     volumes:
       - ./gitlab/volumes/config:/etc/gitlab
+  kibana:
+    container_name: kibana
+    environment:
+      - "ELASTICSEARCH_URL=http://elasticsearch:9200"
+    hostname: kibana
+    image: kibana:5.5.0
+    links:
+      - elasticsearch
+    ports:
+      - 8090:5601/tcp
   logstash:
     command: -f /etc/logstash/conf.d/logstash.conf
     container_name: logstash
