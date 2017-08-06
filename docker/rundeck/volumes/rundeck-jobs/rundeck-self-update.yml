@@ -1,13 +1,15 @@
-- description: '''Self-service'' update'
+- description: |-
+    Update - Rundeck's Job Definitions
   executionEnabled: true
-  id: 6149b69b-c964-42f9-bad9-60dc021627f1
+  group: Initial Pack
   loglevel: INFO
   name: Rundeck Update
   nodeFilterEditable: false
   scheduleEnabled: true
   sequence:
     commands:
-    - script: |-
+    - description: Updating Rundeck's Job Definitions
+      script: |-
         #!/bin/bash
         gitRepository="http://gitlab/root/ansible-lab.git"
         gitClonePath="${HOME}/ansible-lab"
@@ -42,4 +44,3 @@
         done
     keepgoing: false
     strategy: node-first
-  uuid: 6149b69b-c964-42f9-bad9-60dc021627f1
