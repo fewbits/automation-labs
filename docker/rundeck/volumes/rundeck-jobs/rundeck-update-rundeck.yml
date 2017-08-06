@@ -36,10 +36,10 @@
         fi
 
         echo "Looking for Rundeck Job files"
-        find ${gitClonePath} -name "rundeck-*.yml"
+        find ${gitClonePath} -name "*rundeck*.yml"
 
         echo "Importing Rundeck Jobs"
-        for jobFile in `find ${gitClonePath} -name "rundeck-*.yml"`
+        for jobFile in `find ${gitClonePath} -name "*rundeck*.yml"`
         do
           rd jobs load --file ${jobFile} --project ${jobProject} --format ${jobFormat} --duplicate ${jobDuplicate}
         done
