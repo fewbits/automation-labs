@@ -61,9 +61,10 @@ function labStart() {
   waitForApp "rundeck" '${RD_URL}'
 
   # Importing Rundeck Jobs
-  rundeckJobLoad "ansible-lab" "rundeck-update.yml" "yaml" "update"
-  rundeckJobLoad "ansible-lab" "rundeck-playbook.yml" "yaml" "update"
   rundeckJobLoad "ansible-lab" "rundeck-hello-world.yml" "yaml" "update"
+  rundeckJobLoad "ansible-lab" "rundeck-self-update.yml" "yaml" "update"
+  rundeckJobLoad "ansible-lab" "rundeck-ansible-update.yml" "yaml" "update"
+  #rundeckJobLoad "ansible-lab" "rundeck-playbook.yml" "yaml" "update"
 
   ## Configuring GitLab
 
