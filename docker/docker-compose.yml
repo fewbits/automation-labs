@@ -93,7 +93,6 @@ services:
       context: ./rundeck
       dockerfile: Dockerfile
     container_name: rundeck
-    entrypoint: sleep 60
     environment:
     - "SERVER_URL=http://localhost:4440"
     - "EXTERNAL_SERVER_URL=http://${usrExternalIP}:8080"
