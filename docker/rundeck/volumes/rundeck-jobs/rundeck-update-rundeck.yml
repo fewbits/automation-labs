@@ -1,5 +1,6 @@
 - description: |-
-    Update - Rundeck's Job Definitions
+    Update Rundeck's Job Definitions
+  id: 6a4fb6cc-607d-4e12-9763-1e986a050efd
   executionEnabled: true
   group: Initial Pack
   loglevel: INFO
