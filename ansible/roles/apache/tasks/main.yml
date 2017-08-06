@@ -1,6 +1,0 @@
----
-# tasks file for apache
-- name: Configuring Apache files
-  file:
-    name: /tmp/apache
-    state: absent

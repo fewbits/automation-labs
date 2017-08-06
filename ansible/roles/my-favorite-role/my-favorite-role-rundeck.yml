@@ -1,8 +1,7 @@
-- description: ''
+- description: 'The best!'
   executionEnabled: true
-  id: 1f82db91-6d3b-4905-a7dc-4c41dba05aab
   loglevel: DEBUG
-  name: My Second Role
+  name: My Favorite Role
   nodeFilterEditable: false
   nodefilters:
     dispatch:
@@ -26,5 +25,3 @@
         echo "The string is => $RD_OPTION_OPTSTRING"
     keepgoing: false
     strategy: node-first
-  uuid: 1f82db91-6d3b-4905-a7dc-4c41dba05aab
-

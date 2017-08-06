@@ -1,0 +1,5 @@
+---
+- name: Cleaning temporary files
+  file:
+    name: /tmp/files
+    state: absent

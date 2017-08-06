@@ -1,8 +1,7 @@
-- description: Executes an Ansible Playbook
+- description: Cleans temporary files from servers
   executionEnabled: true
-  id: 7ac894bd-3629-49e1-94cb-4dd449f7f050
   loglevel: INFO
-  name: Ansible Playbook
+  name: Files Cleanup
   nodeFilterEditable: false
   nodefilters:
     dispatch:
@@ -24,8 +23,7 @@
   scheduleEnabled: true
   sequence:
     commands:
-    - description: Executing an Ansible Playbook
-      exec: /usr/bin/ansible-playbook /etc/ansible/apache.yml
+    - description: Calling Ansible Playbook
+      exec: /usr/bin/ansible-playbook /root/ansible-lab/files-cleanup-playbook.yml
     keepgoing: false
     strategy: node-first
-  uuid: 7ac894bd-3629-49e1-94cb-4dd449f7f050
