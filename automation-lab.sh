@@ -58,32 +58,31 @@ function labStart() {
   ## Configuring Rundeck
 
   # Waiting for Rundeck to start
-  waitForApp "rundeck" '${RD_URL}'
+#  waitForApp "rundeck" '${RD_URL}'
 
   # Importing Rundeck Jobs
-  rundeckJobLoad "ansible-lab" "rundeck-hello-world.yml" "yaml" "update"
-  rundeckJobLoad "ansible-lab" "rundeck-update-rundeck.yml" "yaml" "update"
-  rundeckJobLoad "ansible-lab" "rundeck-update-ansible.yml" "yaml" "update"
-  #rundeckJobLoad "ansible-lab" "rundeck-playbook.yml" "yaml" "update"
+#  rundeckJobLoad "ansible-lab" "rundeck-hello-world.yml" "yaml" "update"
+#  rundeckJobLoad "ansible-lab" "rundeck-update-rundeck.yml" "yaml" "update"
+#  rundeckJobLoad "ansible-lab" "rundeck-update-ansible.yml" "yaml" "update"
 
   ## Configuring GitLab
 
   # Waiting for GitLab to start
-  waitForApp "gitlab" "http://localhost"
+#  waitForApp "gitlab" "http://localhost"
 
   # Private Token
-  printLog info "Obtaining GitLab Private Token"
-  docker-compose --file ${sysDockerComposePath} exec --user gitlab-psql gitlab bash -c '/etc/gitlab/gitlab-token.sh' 2> /dev/null
-  docker-compose --file ${sysDockerComposePath} exec gitlab bash -c 'cat /tmp/token.txt' 2> /dev/null
+#  printLog info "Obtaining GitLab Private Token"
+#  docker-compose --file ${sysDockerComposePath} exec --user gitlab-psql gitlab bash -c '/etc/gitlab/gitlab-token.sh' 2> /dev/null
+#  docker-compose --file ${sysDockerComposePath} exec gitlab bash -c 'cat /tmp/token.txt' 2> /dev/null
 
   # Keys, Repository and Webhooks
-  printLog info "Preparing GitLab Keys, Repository and Webhooks"
-  docker-compose --file ${sysDockerComposePath} exec gitlab bash -c '/etc/gitlab/gitlab-config.sh' 2> /dev/null
+#  printLog info "Preparing GitLab Keys, Repository and Webhooks"
+#  docker-compose --file ${sysDockerComposePath} exec gitlab bash -c '/etc/gitlab/gitlab-config.sh' 2> /dev/null
 
   # OK - We are all set
-  printLog info "The lab is ready to use - Click on the links below and have fun :)"
-  printLog info "Rundeck => http://${usrExternalIP}:8080"
-  printLog info "GitLab => http://${usrExternalIP}"
+#  printLog info "The lab is ready to use - Click on the links below and have fun :)"
+#  printLog info "Rundeck => http://${usrExternalIP}:8080"
+#  printLog info "GitLab => http://${usrExternalIP}"
 }
 
 function labStop() {
