@@ -43,7 +43,7 @@ function labStart() {
   docker-compose --file ${sysDockerComposePath} build 2>/dev/null
 
   printLog info "Starting the Automation Lab..."
-  docker-compose --file ${sysDockerComposePath} up -d #2>/dev/null
+  docker-compose --file ${sysDockerComposePath} up -d 2>/dev/null
   labStartRC=$?
   if [ ${labStartRC} -eq 0 ]; then
     printLog info "Automation Lab started"
@@ -76,8 +76,8 @@ function labStart() {
   docker-compose --file ${sysDockerComposePath} exec --user gitlab-psql gitlab bash -c '/etc/gitlab/gitlab-token.sh' 2> /dev/null
   docker-compose --file ${sysDockerComposePath} exec gitlab bash -c 'cat /tmp/token.txt' 2> /dev/null
 
-  # Repository and WebHook
-  printLog info "Preparing GitLab Repository, Webhooks ans Keys"
+  # Keys, Repository and Webhooks
+  printLog info "Preparing GitLab Keys, Repository and Webhooks"
   docker-compose --file ${sysDockerComposePath} exec gitlab bash -c '/etc/gitlab/gitlab-config.sh' 2> /dev/null
 
   # OK - We are all set
@@ -88,7 +88,7 @@ function labStart() {
 
 function labStop() {
   printLog info "Stopping the Automation Lab..."
-  docker-compose --file ${sysDockerComposePath} down # 2> /dev/null
+  docker-compose --file ${sysDockerComposePath} down 2> /dev/null
   labStopRC=$?
 
   if [ ${labStopRC} -eq 0 ]; then

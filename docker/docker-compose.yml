@@ -35,10 +35,11 @@ services:
       - node-01
       - node-02
       - node-03
-#  apache:
-#    container_name: apache
-#    hostname: apache
-#    image: httpd:2.4.27-alpine
+  elasticsearch:
+    hostname: elasticsearch
+    image: elasticsearch:5.5.0
+    volumes:
+      - ./elasticsearch/volumes/config:/usr/share/elasticsearch/config
   gitlab:
     container_name: gitlab
     environment:
@@ -50,28 +51,6 @@ services:
       - 80:80/tcp
     volumes:
       - ./gitlab/volumes/config:/etc/gitlab
-#  jenkins:
-#    container_name: jenkins
-#    hostname: jenkins
-#    image: "jenkins:2.60.1-alpine"
-#    ports:
-#      - "443:8080"
-#    links:
-#      - ansible-core
-#  nginx:
-#    build:
-#      context: ./nginx
-#      dockerfile: Dockerfile
-#    container_name: nginx
-#    hostname: nginx
-#    image: automation-labs/nginx:1.0
-#    links:
-#      - apache
-#      - rundeck
-#    ports:
-#      - 80:81/tcp
-#    volumes:
-#      - ./nginx/volumes/lab.conf:/etc/nginx/conf.d/lab.conf
   node-01:
     container_name: node-01
     hostname: node-01

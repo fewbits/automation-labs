@@ -38,11 +38,14 @@
         echo "Looking for Rundeck Job files"
         find ${gitClonePath} -name "*rundeck*.yml"
 
-        echo "Importing Rundeck Jobs"
+        echo "Batch Import - Starting"
         for jobFile in `find ${gitClonePath} -name "*rundeck*.yml"`
         do
+          echo "Importing Rundeck Job ${jobFile}..."
           rd jobs load --file ${jobFile} --project ${jobProject} --format ${jobFormat} --duplicate ${jobDuplicate}
         done
+
+        echo "Batch Import - Finished"
     keepgoing: false
     strategy: node-first
   uuid: 6a4fb6cc-607d-4e12-9763-1e986a050efd
