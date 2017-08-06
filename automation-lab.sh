@@ -94,7 +94,7 @@ function labStart() {
 
 function labStop() {
   printLog info "Stopping the Automation Lab..."
-  docker-compose --file ${sysDockerComposePath} down 2> /dev/null
+  docker-compose --file ${sysDockerComposePath} down # 2> /dev/null
   labStopRC=$?
 
   if [ ${labStopRC} -eq 0 ]; then
