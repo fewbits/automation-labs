@@ -71,14 +71,14 @@ function labStart() {
   # Waiting for GitLab to start
   waitForApp "gitlab" "http://localhost"
 
-  # Token
-  #printLog info "Obtaining GitLab Private Token"
-  #docker-compose --file ${sysDockerComposePath} exec --user gitlab-psql gitlab bash -c '/etc/gitlab/gitlab-token.sh' 2> /dev/null
-  #docker-compose --file ${sysDockerComposePath} exec gitlab bash -c 'cat /tmp/token.txt' 2> /dev/null
+  # Private Token
+  printLog info "Obtaining GitLab Private Token"
+  docker-compose --file ${sysDockerComposePath} exec --user gitlab-psql gitlab bash -c '/etc/gitlab/gitlab-token.sh' 2> /dev/null
+  docker-compose --file ${sysDockerComposePath} exec gitlab bash -c 'cat /tmp/token.txt' 2> /dev/null
 
   # Repository and WebHook
-  #printLog info "Creating GitLab Repository and WebHook"
-  #docker-compose --file ${sysDockerComposePath} exec gitlab bash -c '/etc/gitlab/gitlab-config.sh' 2> /dev/null
+  printLog info "Preparing GitLab Repository, Webhooks ans Keys"
+  docker-compose --file ${sysDockerComposePath} exec gitlab bash -c '/etc/gitlab/gitlab-config.sh' 2> /dev/null
 
   # OK - We are all set
   printLog info "The lab is ready to use - Go to http://${usrExternalIP}:8080 and have fun :)"
