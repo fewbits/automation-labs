@@ -34,6 +34,8 @@
           echo "Git - Repository not found - Cloning"
           git clone ${gitRepository} ${gitClonePath}
         fi
+
+        echo "Done"
     keepgoing: false
     strategy: node-first
   uuid: b8d0bc47-899b-4e97-be93-846c84c406d3

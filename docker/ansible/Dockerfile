@@ -10,7 +10,7 @@ ARG http_proxy
 ARG https_proxy
 
 # Installing Ansible and dependencies
-RUN apk add --update ansible openssh
+RUN apk add --update ansible bash openssh git
 
 # Copying configuration files
 COPY files/etc-ssh /etc/ssh

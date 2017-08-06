@@ -11,6 +11,7 @@ services:
     hostname: ansible-core-01
     image: automation-lab/ansible:1.0
     links:
+      - gitlab
       - node-01
       - node-02
       - node-03
@@ -20,6 +21,7 @@ services:
     hostname: ansible-core-02
     image: automation-lab/ansible:1.0
     links:
+      - gitlab
       - node-01
       - node-02
       - node-03
@@ -29,6 +31,7 @@ services:
     hostname: ansible-core-03
     image: automation-lab/ansible:1.0
     links:
+      - gitlab
       - node-01
       - node-02
       - node-03
@@ -43,8 +46,6 @@ services:
       - "GITLAB_ROOT_PASSWORD=automation"
     hostname: gitlab
     image: gitlab/gitlab-ce:9.4.3-ce.0
-    links:
-      - rundeck
     ports:
       - 80:80/tcp
     volumes:
@@ -109,6 +110,7 @@ services:
       - ansible-core-01
       - ansible-core-02
       - ansible-core-03
+      - gitlab
     ports:
       - 8080:4440/tcp
     volumes:
