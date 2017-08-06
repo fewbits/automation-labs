@@ -1,9 +1,8 @@
-- description: Update Ansible's Playbooks and Roles
+- description: Cleans temporary files from servers
   executionEnabled: true
-  group: Initial Pack
-  id: b8d0bc47-899b-4e97-be93-846c84c406d3
+  id: 4ebcbcfc-8adf-4ba3-b1ff-f08741812649
   loglevel: INFO
-  name: Update - Ansible
+  name: Files Cleanup
   nodeFilterEditable: false
   nodefilters:
     dispatch:
@@ -13,29 +12,24 @@
       threadcount: 1
     filter: 'tags: ansible'
   nodesSelectedByDefault: true
+  orchestrator:
+    configuration:
+      count: '1'
+    type: subset
+  schedule:
+    dayofmonth:
+      day: '*'
+    month: '*'
+    time:
+      hour: '*'
+      minute: '*'
+      seconds: '0'
+    year: '*'
   scheduleEnabled: true
   sequence:
     commands:
-    - description: Updating Ansible's Playbooks and Roles
-      script: |-
-        #!/bin/bash
-        gitRepository="http://gitlab/root/ansible-lab.git"
-        gitClonePath="${HOME}/ansible-lab"
-        jobProject="ansible-lab"
-        jobFormat="yaml"
-        jobDuplicate="update"
-
-        ## This script will 'auto-update' Ansible's Repository
-
-        if [ -d ${gitClonePath} ]; then
-          echo "Git - Repository found - Pulling for changes"
-          cd ${gitClonePath} && git pull
-        else
-          echo "Git - Repository not found - Cloning"
-          git clone ${gitRepository} ${gitClonePath}
-        fi
-
-        echo "Done"
+    - description: Calling Ansible Playbook
+      exec: /usr/bin/ansible-playbook -i /root/ansible-lab/hosts /root/ansible-lab/files-cleanup-playbook.yml
     keepgoing: false
     strategy: node-first
-  uuid: b8d0bc47-899b-4e97-be93-846c84c406d3
+  uuid: 4ebcbcfc-8adf-4ba3-b1ff-f08741812649
