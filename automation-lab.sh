@@ -68,7 +68,7 @@ function labStart() {
   ## Configuring GitLab
 
   # Waiting for GitLab to start
-  #waitForApp "gitlab" "http://localhost"
+  waitForApp "gitlab" "http://localhost"
 
   # Token
   #printLog info "Obtaining GitLab Private Token"

@@ -36,17 +36,19 @@ services:
 #    container_name: apache
 #    hostname: apache
 #    image: httpd:2.4.27-alpine
-#  gitlab:
-#    container_name: gitlab
-#    environment:
-#      - "GITLAB_OMNIBUS_CONFIG=external_url 'http://${usrExternalIP}/';"
-#      - "GITLAB_ROOT_PASSWORD=automation"
-#    hostname: gitlab
-#    image: gitlab/gitlab-ce:9.4.3-ce.0
-#    ports:
-#      - 80:80/tcp
-#    volumes:
-#      - ./gitlab/volumes/config:/etc/gitlab
+  gitlab:
+    container_name: gitlab
+    environment:
+      - "GITLAB_OMNIBUS_CONFIG=external_url 'http://${usrExternalIP}/';"
+      - "GITLAB_ROOT_PASSWORD=automation"
+    hostname: gitlab
+    image: gitlab/gitlab-ce:9.4.3-ce.0
+    links:
+      - rundeck
+    ports:
+      - 80:80/tcp
+    volumes:
+      - ./gitlab/volumes/config:/etc/gitlab
 #  jenkins:
 #    container_name: jenkins
 #    hostname: jenkins
