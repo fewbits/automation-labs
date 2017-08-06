@@ -61,12 +61,12 @@ function labStart() {
   ## Configuring Rundeck
 
   # Waiting for Rundeck to start
-#  waitForApp "rundeck" '${RD_URL}'
+  waitForApp "rundeck" '${RD_URL}'
 
   # Importing Rundeck Jobs
-#  rundeckJobLoad "ansible-lab" "rundeck-hello-world.yml" "yaml" "update"
-#  rundeckJobLoad "ansible-lab" "rundeck-update-rundeck.yml" "yaml" "update"
-#  rundeckJobLoad "ansible-lab" "rundeck-update-ansible.yml" "yaml" "update"
+  rundeckJobLoad "ansible-lab" "rundeck-hello-world.yml" "yaml" "update"
+  rundeckJobLoad "ansible-lab" "rundeck-update-rundeck.yml" "yaml" "update"
+  rundeckJobLoad "ansible-lab" "rundeck-update-ansible.yml" "yaml" "update"
 
   ## Configuring GitLab
 
