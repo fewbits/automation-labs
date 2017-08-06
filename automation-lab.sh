@@ -81,7 +81,9 @@ function labStart() {
   docker-compose --file ${sysDockerComposePath} exec gitlab bash -c '/etc/gitlab/gitlab-config.sh' 2> /dev/null
 
   # OK - We are all set
-  printLog info "The lab is ready to use - Go to http://${usrExternalIP}:8080 and have fun :)"
+  printLog info "The lab is ready to use - Click on the links below and have fun :)"
+  printLog info "Rundeck => http://${usrExternalIP}:8080"
+  printLog info "GitLab => http://${usrExternalIP}"
 }
 
 function labStop() {

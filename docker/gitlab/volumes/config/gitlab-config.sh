@@ -4,7 +4,7 @@ gitlabRepository="ansible-lab"
 
 ## Creating Repository
 echo "GitLab - Creating Repository"
-curl -H "Content-type: application/json" -X POST -d "{\"name\": \"${gitlabRepository}\"}" http://localhost/api/v3/projects?private_token=${gitlabToken} >/dev/null 2>&1
+curl -H "Content-type: application/json" -X POST -d "{\"name\":\"${gitlabRepository}\",\"visibility\":\"public\"}" http://localhost/api/v4/projects?private_token=${gitlabToken} >/dev/null 2>&1
 
 ## Creating Webhooks
 echo "GitLab - Creating Webhooks"
