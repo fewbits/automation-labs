@@ -1,11 +1,18 @@
-- description: |-
-    Update Ansible's Playbooks and Roles
-  id: b8d0bc47-899b-4e97-be93-846c84c406d3
+- description: Update Ansible's Playbooks and Roles
   executionEnabled: true
   group: Initial Pack
+  id: b8d0bc47-899b-4e97-be93-846c84c406d3
   loglevel: INFO
   name: Update - Ansible
   nodeFilterEditable: false
+  nodefilters:
+    dispatch:
+      excludePrecedence: true
+      keepgoing: false
+      rankOrder: ascending
+      threadcount: 1
+    filter: 'tags: ansible'
+  nodesSelectedByDefault: true
   scheduleEnabled: true
   sequence:
     commands:
@@ -18,14 +25,7 @@
         jobFormat="yaml"
         jobDuplicate="update"
 
-        # Rundeck Config
-        RD_URL="http://localhost:4440"
-        RD_BYPASS_URL="http://localhost:8080"
-        RD_USER="admin"
-        RD_PASSWORD="admin"
-        RD_PROJECT="ansible-lab"
-
-        ## This script will 'auto-update' Rundeck's Jobs
+        ## This script will 'auto-update' Ansible's Repository
 
         if [ -d ${gitClonePath} ]; then
           echo "Git - Repository found - Pulling for changes"
@@ -34,15 +34,6 @@
           echo "Git - Repository not found - Cloning"
           git clone ${gitRepository} ${gitClonePath}
         fi
-
-        echo "Looking for Rundeck Job files"
-        find ${gitClonePath} -name "rundeck-*.yml"
-
-        echo "Importing Rundeck Jobs"
-        for jobFile in `find ${gitClonePath} -name "rundeck-*.yml"`
-        do
-          rd jobs load --file ${jobFile} --project ${jobProject} --format ${jobFormat} --duplicate ${jobDuplicate}
-        done
     keepgoing: false
     strategy: node-first
   uuid: b8d0bc47-899b-4e97-be93-846c84c406d3
