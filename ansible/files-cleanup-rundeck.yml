@@ -1,5 +1,6 @@
 - description: Cleans temporary files from servers
   executionEnabled: true
+  id: 4ebcbcfc-8adf-4ba3-b1ff-f08741812649
   loglevel: INFO
   name: Files Cleanup
   nodeFilterEditable: false
@@ -9,8 +10,12 @@
       keepgoing: false
       rankOrder: ascending
       threadcount: 1
-    filter: ansible-core
+    filter: 'tags: ansible'
   nodesSelectedByDefault: true
+  orchestrator:
+    configuration:
+      count: '1'
+    type: subset
   schedule:
     dayofmonth:
       day: '*'
@@ -24,6 +29,7 @@
   sequence:
     commands:
     - description: Calling Ansible Playbook
-      exec: /usr/bin/ansible-playbook /root/ansible-lab/files-cleanup-playbook.yml
+      exec: /usr/bin/ansible-playbook -i /root/ansible-lab/hosts /root/ansible-lab/files-cleanup-playbook.yml
     keepgoing: false
     strategy: node-first
+  uuid: 4ebcbcfc-8adf-4ba3-b1ff-f08741812649
