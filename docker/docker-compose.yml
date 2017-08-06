@@ -52,6 +52,15 @@ services:
       - 80:80/tcp
     volumes:
       - ./gitlab/volumes/config:/etc/gitlab
+  logstash:
+    command: -f /etc/logstash/conf.d/logstash.conf
+    container_name: logstash
+    hostname: logstash
+    image: logstash:5.5.0
+    links:
+      - elasticsearch
+    volumes:
+      - ./logstash/volumes/config:/etc/logstash/conf.d
   node-01:
     container_name: node-01
     hostname: node-01
