@@ -39,6 +39,9 @@ function labStart() {
     printLog error "Wrong syntax. Try `basename $0` --help"
   fi
 
+  printLog info "Correcting permissions on filesystem" && sleep 0.5
+  chmod -R 777 docker/elasticsearch/volumes/config
+
   printLog info "Building the Automation Lab..."
   docker-compose --file ${sysDockerComposePath} build 2>/dev/null
 
@@ -51,7 +54,7 @@ function labStart() {
     printLog error "Failed to start the Automation Lab"
   fi
 
-  sleep 3
+  sleep 4
 
   docker-compose --file ${sysDockerComposePath} logs --tail=1 2> /dev/null
 
