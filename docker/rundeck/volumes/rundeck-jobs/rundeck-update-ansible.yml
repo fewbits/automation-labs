@@ -1,14 +1,14 @@
 - description: |-
-    Update - Rundeck's Job Definitions
+    Update - Ansible's Playbooks and Roles
   executionEnabled: true
   group: Initial Pack
   loglevel: INFO
-  name: Rundeck Update
+  name: Update - Ansible
   nodeFilterEditable: false
   scheduleEnabled: true
   sequence:
     commands:
-    - description: Updating Rundeck's Job Definitions
+    - description: Updating Ansible's Playbooks and Roles
       script: |-
         #!/bin/bash
         gitRepository="http://gitlab/root/ansible-lab.git"
