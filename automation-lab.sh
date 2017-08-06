@@ -53,7 +53,7 @@ function labStart() {
 
   sleep 3
 
-  docker-compose --file ${sysDockerComposePath} logs --tail=8 2> /dev/null
+  docker-compose --file ${sysDockerComposePath} logs --tail=1 2> /dev/null
 
   ## Configuring Rundeck
 
