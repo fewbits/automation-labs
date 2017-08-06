@@ -71,23 +71,25 @@ function labStart() {
   ## Configuring GitLab
 
   # Waiting for GitLab to start
-#  waitForApp "gitlab" "http://localhost"
+  waitForApp "gitlab" "http://localhost"
 
   # Private Token
-#  printLog info "Obtaining GitLab Private Token"
-#  docker-compose --file ${sysDockerComposePath} exec --user gitlab-psql gitlab bash -c '/etc/gitlab/gitlab-token.sh' 2> /dev/null
-#  docker-compose --file ${sysDockerComposePath} exec gitlab bash -c 'cat /tmp/token.txt' 2> /dev/null
+  printLog info "Obtaining GitLab Private Token"
+  docker-compose --file ${sysDockerComposePath} exec --user gitlab-psql gitlab bash -c '/etc/gitlab/gitlab-token.sh' 2> /dev/null
+  docker-compose --file ${sysDockerComposePath} exec gitlab bash -c 'cat /tmp/token.txt' 2> /dev/null
 
   # Keys, Repository and Webhooks
-#  printLog info "Preparing GitLab Keys, Repository and Webhooks"
-#  docker-compose --file ${sysDockerComposePath} exec gitlab bash -c '/etc/gitlab/gitlab-config.sh' 2> /dev/null
+  printLog info "Preparing GitLab Keys, Repository and Webhooks"
+  docker-compose --file ${sysDockerComposePath} exec gitlab bash -c '/etc/gitlab/gitlab-config.sh' 2> /dev/null
 
   # OK - We are all set
   printLog info "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
   printLog info "The lab is ready to use - Click on the links below and have fun :)"
+  printLog info "------------------------------------------------------------------"
   printLog info "GitLab => http://${usrExternalIP}"
   printLog info "Rundeck => http://${usrExternalIP}:8080"
   printLog info "Kibana => http://${usrExternalIP}:8090"
+  printLog info "Grafana => http://${usrExternalIP}:8091"
   printLog info "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
 }
 

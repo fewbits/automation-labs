@@ -52,6 +52,12 @@ services:
       - 80:80/tcp
     volumes:
       - ./gitlab/volumes/config:/etc/gitlab
+  grafana:
+    container_name: grafana
+    hostname: grafana
+    image: grafana/grafana:4.4.2
+    ports:
+      - 8091:3000/tcp
   kibana:
     container_name: kibana
     environment:
