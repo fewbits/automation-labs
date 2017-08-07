@@ -79,7 +79,7 @@ function labStart() {
   docker-compose --file ${sysDockerComposePath} exec gitlab bash -c 'cat /tmp/token.txt' 2> /dev/null
 
   # Keys, Repository and Webhooks
-  printLog info "Preparing GitLab Keys, Repository and Webhooks"
+  printLog info "Preparing GitLab Keys, Repository and Webhooks" && sleep 10
   docker-compose --file ${sysDockerComposePath} exec gitlab bash -c '/etc/gitlab/gitlab-config.sh' 2> /dev/null
 
   # OK - We are all set
